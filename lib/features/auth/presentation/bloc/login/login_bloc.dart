@@ -1,30 +1,26 @@
 import 'package:bloc/bloc.dart';
 import 'package:cinetrack/features/auth/domain/usecases/login_user.dart';
-import 'package:cinetrack/features/auth/presentation/bloc/login/login_event.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/login/login_state.dart';
 
-class LoginBloc extends Bloc<LoginEvent, LoginState> {
+class LoginBloc extends Cubit<LoginState> {
   final LoginUser loginUser;
 
-  LoginBloc(this.loginUser) : super(LoginInitial()) {
-    on<LoginSubmitted>(_onLoginSubmitted);
-  }
+  LoginBloc(this.loginUser) : super(LoginInitial());
 
-  Future<void> _onLoginSubmitted(
-    LoginSubmitted event,
-    Emitter<LoginState> emit,
-  ) async {
-    if (event.email.isEmpty) {
-      return emit(LoginFailure("Email is required"));
+  Future<void> login({required String email, required String password}) async {
+    if (email.isEmpty) {
+      emit(LoginFailure("Email is required"));
+      return;
     }
 
-    if (event.password.isEmpty) {
-      return emit(LoginFailure("Password is required"));
+    if (password.isEmpty) {
+      emit(LoginFailure("Password is required"));
+      return;
     }
 
     emit(LoginLoading());
 
-    final result = await loginUser.execute(event.email, event.password);
+    final result = await loginUser.execute(email, password);
 
     result.fold(
       (failure) => emit(LoginFailure(failure.message)),

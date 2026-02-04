@@ -2,7 +2,6 @@ import 'package:cinetrack/core/router/app_routes.dart';
 import 'package:cinetrack/core/utils/show_snack.dart';
 import 'package:cinetrack/core/widget/app_background.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/reset_password/reset_password_bloc.dart';
-import 'package:cinetrack/features/auth/presentation/bloc/reset_password/reset_password_event.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/reset_password/reset_password_state.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/auth_field.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/button_submit.dart';
@@ -63,12 +62,10 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     onTap: () {
                       final newPassword = passwordController.text.trim();
 
-                      context.read<ResetPasswordBloc>().add(
-                        ResetPasswordSubmitted(
-                          widget.email,
-                          widget.code,
-                          newPassword,
-                        ),
+                      context.read<ResetPasswordBloc>().reset(
+                        email: widget.email,
+                        code: widget.code,
+                        newPassword: newPassword,
                       );
                     },
                   );

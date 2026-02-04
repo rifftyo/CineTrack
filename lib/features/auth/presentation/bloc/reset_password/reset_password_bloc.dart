@@ -1,26 +1,20 @@
 import 'package:bloc/bloc.dart';
 import 'package:cinetrack/features/auth/domain/usecases/reset_password.dart';
-import 'package:cinetrack/features/auth/presentation/bloc/reset_password/reset_password_event.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/reset_password/reset_password_state.dart';
 
-class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
+class ResetPasswordBloc extends Cubit<ResetPasswordState> {
   final ResetPassword resetPassword;
 
-  ResetPasswordBloc(this.resetPassword) : super(ResetPasswordInitial()) {
-    on<ResetPasswordSubmitted>(_onResetPasswordSubmitted);
-  }
+  ResetPasswordBloc(this.resetPassword) : super(ResetPasswordInitial());
 
-  Future<void> _onResetPasswordSubmitted(
-    ResetPasswordSubmitted event,
-    Emitter<ResetPasswordState> emit,
-  ) async {
+  Future<void> reset({
+    required String email,
+    required String code,
+    required String newPassword,
+  }) async {
     emit(ResetPasswordLoading());
 
-    final result = await resetPassword.execute(
-      event.email,
-      event.code,
-      event.newPassword,
-    );
+    final result = await resetPassword.execute(email, code, newPassword);
 
     result.fold(
       (failure) => emit(ResetPasswordFailure(failure.message)),

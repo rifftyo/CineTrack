@@ -1,5 +1,5 @@
-import 'package:cinetrack/core/error/exceptions.dart';
 import 'package:cinetrack/core/network/dio_client.dart';
+import 'package:cinetrack/core/network/dio_error_handler.dart';
 import 'package:cinetrack/features/auth/data/model/auth_response.dart';
 import 'package:cinetrack/features/auth/data/model/message_response.dart';
 import 'package:dio/dio.dart';
@@ -37,21 +37,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       return AuthResponse.fromJson(response.data);
     } on DioException catch (e) {
-      if (e.type == DioExceptionType.connectionError ||
-          e.type == DioExceptionType.connectionTimeout) {
-        throw ConnectionException("No Internet Connection");
-      }
-
-      final statusCode = e.response?.statusCode;
-      final errorMessage = e.response?.data["message"];
-
-      if (statusCode == 401) {
-        throw UnauthorizedException(errorMessage ?? "Unauthorized");
-      } else if (statusCode == 400) {
-        throw BadRequestException(errorMessage ?? "Data tidak valid");
-      } else {
-        throw ServerException(errorMessage ?? "Server Error");
-      }
+      handleDioError(e);
     }
   }
 
@@ -74,21 +60,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
       return MessageResponse.fromJson(response.data);
     } on DioException catch (e) {
-      if (e.type == DioExceptionType.connectionError ||
-          e.type == DioExceptionType.connectionTimeout) {
-        throw ConnectionException("No Internet Connection");
-      }
-
-      final statusCode = e.response?.statusCode;
-      final errorMessage = e.response?.data["message"];
-
-      if (statusCode == 401) {
-        throw UnauthorizedException(errorMessage ?? "Unauthorized");
-      } else if (statusCode == 400) {
-        throw BadRequestException(errorMessage ?? "Data tidak valid");
-      } else {
-        throw ServerException(errorMessage ?? "Server Error");
-      }
+      handleDioError(e);
     }
   }
 
@@ -102,21 +74,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       return MessageResponse.fromJson(response.data);
     } on DioException catch (e) {
-      if (e.type == DioExceptionType.connectionError ||
-          e.type == DioExceptionType.connectionTimeout) {
-        throw ConnectionException("No Internet Connection");
-      }
-
-      final statusCode = e.response?.statusCode;
-      final errorMessage = e.response?.data["message"];
-
-      if (statusCode == 401) {
-        throw UnauthorizedException(errorMessage ?? "Unauthorized");
-      } else if (statusCode == 400) {
-        throw BadRequestException(errorMessage ?? "Data tidak valid");
-      } else {
-        throw ServerException(errorMessage ?? "Server Error");
-      }
+      handleDioError(e);
     }
   }
 
@@ -134,21 +92,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       return MessageResponse.fromJson(response.data);
     } on DioException catch (e) {
-      if (e.type == DioExceptionType.connectionError ||
-          e.type == DioExceptionType.connectionTimeout) {
-        throw ConnectionException("No Internet Connection");
-      }
-
-      final statusCode = e.response?.statusCode;
-      final errorMessage = e.response?.data["message"];
-
-      if (statusCode == 401) {
-        throw UnauthorizedException(errorMessage ?? "Unauthorized");
-      } else if (statusCode == 400) {
-        throw BadRequestException(errorMessage ?? "Data tidak valid");
-      } else {
-        throw ServerException(errorMessage ?? "Server Error");
-      }
+      handleDioError(e);
     }
   }
 
@@ -164,21 +108,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
       return MessageResponse.fromJson(response.data);
     } on DioException catch (e) {
-      if (e.type == DioExceptionType.connectionError ||
-          e.type == DioExceptionType.connectionTimeout) {
-        throw ConnectionException("No Internet Connection");
-      }
-
-      final statusCode = e.response?.statusCode;
-      final errorMessage = e.response?.data["message"];
-
-      if (statusCode == 401) {
-        throw UnauthorizedException(errorMessage ?? "Unauthorized");
-      } else if (statusCode == 400) {
-        throw BadRequestException(errorMessage ?? "Invalid Data");
-      } else {
-        throw ServerException(errorMessage ?? "Server Error");
-      }
+      handleDioError(e);
     }
   }
 
@@ -192,21 +122,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       return AuthResponse.fromJson(response.data);
     } on DioException catch (e) {
-      if (e.type == DioExceptionType.connectionError ||
-          e.type == DioExceptionType.connectionTimeout) {
-        throw ConnectionException("No Internet Connection");
-      }
-
-      final statusCode = e.response?.statusCode;
-      final errorMessage = e.response?.data["message"];
-
-      if (statusCode == 401) {
-        throw UnauthorizedException(errorMessage ?? "Unauthorized");
-      } else if (statusCode == 400) {
-        throw BadRequestException(errorMessage ?? "Invalid Data");
-      } else {
-        throw ServerException(errorMessage ?? "Server Error");
-      }
+      handleDioError(e);
     }
   }
 }

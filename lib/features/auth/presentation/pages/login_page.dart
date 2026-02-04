@@ -4,7 +4,6 @@ import 'package:cinetrack/core/styles/app_text_style.dart';
 import 'package:cinetrack/core/utils/show_snack.dart';
 import 'package:cinetrack/core/widget/app_background.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/login/login_bloc.dart';
-import 'package:cinetrack/features/auth/presentation/bloc/login/login_event.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/login/login_state.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/auth_field.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/button_submit.dart';
@@ -73,6 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                 listener: (context, state) {
                   if (state is LoginSuccess) {
                     showSnack(context, state.message);
+                    Navigator.pushReplacementNamed(context, AppRoutes.main);
                   } else if (state is LoginFailure) {
                     showSnack(context, state.error);
                   }
@@ -85,8 +85,9 @@ class _LoginPageState extends State<LoginPage> {
                       final email = emailController.text.trim();
                       final pass = passwordController.text.trim();
 
-                      context.read<LoginBloc>().add(
-                        LoginSubmitted(email, pass),
+                      context.read<LoginBloc>().login(
+                        email: email,
+                        password: pass,
                       );
                     },
                   );

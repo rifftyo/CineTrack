@@ -2,7 +2,6 @@ import 'package:cinetrack/core/styles/app_text_style.dart';
 import 'package:cinetrack/core/utils/show_snack.dart';
 import 'package:cinetrack/core/widget/app_background.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/verify_user/verify_user_bloc.dart';
-import 'package:cinetrack/features/auth/presentation/bloc/verify_user/verify_user_event.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/verify_user/verify_user_state.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/button_submit.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/footer_auth.dart';
@@ -96,8 +95,9 @@ class _VerifyPageState extends State<VerifyPage> {
                       onTap: () {
                         final code = verificationCode;
 
-                        context.read<VerifyUserBloc>().add(
-                          VerifyUserSubmitted(widget.email, code),
+                        context.read<VerifyUserBloc>().verify(
+                          email: widget.email,
+                          code: code,
                         );
                       },
                     );

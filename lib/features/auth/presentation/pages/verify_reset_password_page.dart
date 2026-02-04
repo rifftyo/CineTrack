@@ -3,7 +3,6 @@ import 'package:cinetrack/core/styles/app_text_style.dart';
 import 'package:cinetrack/core/utils/show_snack.dart';
 import 'package:cinetrack/core/widget/app_background.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/verify_reset_password/verify_reset_password_bloc.dart';
-import 'package:cinetrack/features/auth/presentation/bloc/verify_reset_password/verify_reset_password_event.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/verify_reset_password/verify_reset_password_state.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/button_submit.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/footer_auth.dart';
@@ -86,8 +85,6 @@ class _VerifyResetPasswordPageState extends State<VerifyResetPasswordPage> {
                 BlocConsumer<VerifyResetPasswordBloc, VerifyResetPasswordState>(
                   listener: (context, state) {
                     if (state is VerifyResetPasswordSuccess) {
-                      print("Success" + widget.email);
-                      print("Success" + verificationCode);
                       Navigator.pushNamed(
                         context,
                         AppRoutes.resetPassword,
@@ -97,10 +94,7 @@ class _VerifyResetPasswordPageState extends State<VerifyResetPasswordPage> {
                         },
                       );
                     } else if (state is VerifyResetPasswordFailure) {
-                      print("Fail" + widget.email);
-                      print("Fail" + verificationCode);
                       showSnack(context, state.error);
-                      print(state.error);
                     }
                   },
                   builder: (context, state) {
@@ -110,8 +104,9 @@ class _VerifyResetPasswordPageState extends State<VerifyResetPasswordPage> {
                       onTap: () {
                         final code = verificationCode.trim();
 
-                        context.read<VerifyResetPasswordBloc>().add(
-                          VerifyResetPasswordSubmitted(widget.email, code),
+                        context.read<VerifyResetPasswordBloc>().verify(
+                          email: widget.email,
+                          code: code,
                         );
                       },
                     );

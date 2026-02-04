@@ -9,6 +9,8 @@ import 'package:cinetrack/features/auth/presentation/bloc/request_password/reque
 import 'package:cinetrack/features/auth/presentation/bloc/reset_password/reset_password_bloc.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/verify_reset_password/verify_reset_password_bloc.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/verify_user/verify_user_bloc.dart';
+import 'package:cinetrack/features/home/presentation/bloc/home_bloc.dart';
+import 'package:cinetrack/features/movie/presentation/bloc/search/search_movie_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,12 +29,17 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        // Auth
         BlocProvider(create: (_) => locator<LoginBloc>()),
         BlocProvider(create: (_) => locator<RegisterBloc>()),
         BlocProvider(create: (_) => locator<RequestPasswordBloc>()),
         BlocProvider(create: (_) => locator<VerifyUserBloc>()),
         BlocProvider(create: (_) => locator<VerifyResetPasswordBloc>()),
         BlocProvider(create: (_) => locator<ResetPasswordBloc>()),
+        // Home
+        BlocProvider(create: (_) => locator<HomeBloc>()),
+        // Movie
+        BlocProvider(create: (_) => locator<SearchMovieBloc>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

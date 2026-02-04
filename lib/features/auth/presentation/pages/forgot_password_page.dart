@@ -3,7 +3,6 @@ import 'package:cinetrack/core/styles/app_text_style.dart';
 import 'package:cinetrack/core/utils/show_snack.dart';
 import 'package:cinetrack/core/widget/app_background.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/request_password/request_password_bloc.dart';
-import 'package:cinetrack/features/auth/presentation/bloc/request_password/request_password_event.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/request_password/request_password_state.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/auth_field.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/button_submit.dart';
@@ -84,9 +83,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     onTap: () {
                       final email = emailController.text.trim();
 
-                      context.read<RequestPasswordBloc>().add(
-                        RequestPasswordSubmitted(email),
-                      );
+                      context.read<RequestPasswordBloc>().request(email: email);
                     },
                   );
                 },

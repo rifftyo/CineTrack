@@ -1,26 +1,21 @@
 import 'package:bloc/bloc.dart';
 import 'package:cinetrack/features/auth/domain/usecases/verify_user.dart';
-import 'package:cinetrack/features/auth/presentation/bloc/verify_user/verify_user_event.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/verify_user/verify_user_state.dart';
 
-class VerifyUserBloc extends Bloc<VerifyUserEvent, VerifyUserState> {
+class VerifyUserBloc extends Cubit<VerifyUserState> {
   final VerifyUser verifyUser;
 
-  VerifyUserBloc(this.verifyUser) : super(VerifyUserInitial()) {
-    on<VerifyUserSubmitted>(_onVerifyUserSubmitted);
-  }
+  VerifyUserBloc(this.verifyUser) : super(VerifyUserInitial());
 
-  Future<void> _onVerifyUserSubmitted(
-    VerifyUserSubmitted event,
-    Emitter<VerifyUserState> emit,
-  ) async {
-    if (event.code.isEmpty) {
-      return emit(VerifyUserFailure('Code is not empty'));
+  Future<void> verify({required String email, required String code}) async {
+    if (code.isEmpty) {
+      emit(VerifyUserFailure('Code is not empty'));
+      return;
     }
 
     emit(VerifyUserLoading());
 
-    final result = await verifyUser.execute(event.email, event.code);
+    final result = await verifyUser.execute(email, code);
 
     result.fold(
       (failure) => emit(VerifyUserFailure(failure.message)),

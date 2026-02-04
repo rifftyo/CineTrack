@@ -8,7 +8,7 @@ class DioClient {
   DioClient(SecureStorage storage) {
     dio = Dio(
       BaseOptions(
-        baseUrl: "https://5aa27c50c4db.ngrok-free.app/api",
+        baseUrl: "https://cinetrack.up.railway.app/api",
         connectTimeout: const Duration(seconds: 10),
         receiveTimeout: const Duration(seconds: 10),
         headers: {

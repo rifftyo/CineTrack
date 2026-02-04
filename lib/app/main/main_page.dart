@@ -1,6 +1,8 @@
-import 'package:cinetrack/app/main/cubit/cubit.dart';
+import 'package:cinetrack/app/main/cubit/main_cubit.dart';
 import 'package:cinetrack/core/styles/app_colors.dart';
 import 'package:cinetrack/core/widget/app_background.dart';
+import 'package:cinetrack/features/home/presentation/pages/home_page.dart';
+import 'package:cinetrack/features/movie/presentation/pages/search_movie_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,8 +10,8 @@ class MainPage extends StatelessWidget {
   const MainPage({super.key});
 
   final List<Widget> _pages = const [
-    Center(child: Text("Home Page")),
-    Center(child: Text("Search Page")),
+    HomePage(),
+    SearchMoviePage(),
     Center(child: Text("Favorites Page")),
     Center(child: Text("Profile Page")),
   ];
@@ -22,7 +24,7 @@ class MainPage extends StatelessWidget {
         builder: (context, currentIndex) {
           return AppBackground(
             child: Scaffold(
-              body: _pages[currentIndex],
+              body: IndexedStack(index: currentIndex, children: _pages),
 
               bottomNavigationBar: BottomNavigationBar(
                 currentIndex: currentIndex,

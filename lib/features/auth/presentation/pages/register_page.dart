@@ -2,7 +2,6 @@ import 'package:cinetrack/core/router/app_routes.dart';
 import 'package:cinetrack/core/utils/show_snack.dart';
 import 'package:cinetrack/core/widget/app_background.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/register/register_bloc.dart';
-import 'package:cinetrack/features/auth/presentation/bloc/register/register_event.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/register/register_state.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/auth_field.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/button_submit.dart';
@@ -113,13 +112,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           return showSnack(context, "Passwords do not match");
                         }
 
-                        context.read<RegisterBloc>().add(
-                          RegisterSubmitted(
-                            email,
-                            fullName,
-                            username,
-                            password,
-                          ),
+                        context.read<RegisterBloc>().register(
+                          fullname: fullName,
+                          username: username,
+                          email: email,
+                          password: password,
                         );
                       },
                     );
