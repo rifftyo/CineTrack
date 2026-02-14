@@ -1,3 +1,4 @@
+import 'package:cinetrack/core/router/app_routes.dart';
 import 'package:cinetrack/core/styles/app_text_style.dart';
 import 'package:cinetrack/features/movie/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
@@ -9,19 +10,26 @@ class MoviesSub extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 30,
-          mainAxisSpacing: 30,
-          childAspectRatio: 0.6,
-        ),
-        itemCount: movies.length,
-        itemBuilder: (context, index) {
-          final movie = movies[index];
-
-          return Column(
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 30,
+        mainAxisSpacing: 30,
+        childAspectRatio: 0.6,
+      ),
+      itemCount: movies.length,
+      itemBuilder: (context, index) {
+        final movie = movies[index];
+    
+        return GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              AppRoutes.detailMovie,
+              arguments: movie.id,
+            );
+          },
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -70,9 +78,9 @@ class MoviesSub extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ],
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

@@ -7,6 +7,9 @@ import 'package:cinetrack/features/auth/presentation/pages/register_page.dart';
 import 'package:cinetrack/features/auth/presentation/pages/reset_password_page.dart';
 import 'package:cinetrack/features/auth/presentation/pages/verify_reset_password_page.dart';
 import 'package:cinetrack/features/auth/presentation/pages/verify_user_page.dart';
+import 'package:cinetrack/features/movie/presentation/pages/detail_movie_page.dart';
+import 'package:cinetrack/features/statistic/presentation/pages/statistic_page.dart';
+import 'package:cinetrack/features/watched/presentation/pages/add_watched_movie_page.dart';
 import 'package:flutter/material.dart';
 
 final Map<String, WidgetBuilder> appPages = {
@@ -33,5 +36,23 @@ final Map<String, WidgetBuilder> appPages = {
 
     return ResetPasswordPage(email: email, code: code);
   },
+
   AppRoutes.main: (context) => const MainPage(),
+  AppRoutes.detailMovie: (context) {
+    final id = ModalRoute.of(context)!.settings.arguments as int;
+
+    return DetailMoviePage(id: id);
+  },
+  AppRoutes.addWatchedMovie: (context) {
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+
+    final id = args["id"] as int;
+    final image = args["image"] as String;
+    final title = args["title"] as String;
+    final year = args["year"] as String;
+
+    return AddWatchedMoviePage(id: id, image: image, title: title, year: year);
+  },
+  AppRoutes.statistic: (context) => const StatisticPage(),
 };

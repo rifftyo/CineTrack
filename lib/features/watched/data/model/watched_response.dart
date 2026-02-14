@@ -7,7 +7,7 @@ part 'watched_response.g.dart';
 class WatchedResponse {
   final String id;
   @JsonKey(name: 'tmdb_id')
-  final String tmdbId;
+  final int tmdbId;
   final String title;
   @JsonKey(name: 'poster_path')
   final String posterPath;

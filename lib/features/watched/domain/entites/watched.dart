@@ -1,6 +1,6 @@
 class Watched {
   final String id;
-  final String tmdbId;
+  final int tmdbId;
   final String title;
   final String posterPath;
   final double tmdbRating;

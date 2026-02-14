@@ -9,7 +9,7 @@ part of 'watched_response.dart';
 WatchedResponse _$WatchedResponseFromJson(Map<String, dynamic> json) =>
     WatchedResponse(
       json['id'] as String,
-      json['tmdb_id'] as String,
+      (json['tmdb_id'] as num).toInt(),
       json['title'] as String,
       json['poster_path'] as String,
       (json['tmdb_rating'] as num).toDouble(),

@@ -6,7 +6,7 @@ part 'statistic_data_response.g.dart';
 @JsonSerializable()
 class StatisticDataResponse {
   final String message;
-  final StatisticResponse data;
+  final Map<String, StatisticResponse> data;
 
   const StatisticDataResponse(this.message, this.data);
 

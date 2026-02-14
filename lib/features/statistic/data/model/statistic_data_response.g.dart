@@ -10,7 +10,10 @@ StatisticDataResponse _$StatisticDataResponseFromJson(
   Map<String, dynamic> json,
 ) => StatisticDataResponse(
   json['message'] as String,
-  StatisticResponse.fromJson(json['data'] as Map<String, dynamic>),
+  (json['data'] as Map<String, dynamic>).map(
+    (k, e) =>
+        MapEntry(k, StatisticResponse.fromJson(e as Map<String, dynamic>)),
+  ),
 );
 
 Map<String, dynamic> _$StatisticDataResponseToJson(

@@ -5,7 +5,7 @@ import 'package:cinetrack/core/widget/app_background.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/request_password/request_password_bloc.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/request_password/request_password_state.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/auth_field.dart';
-import 'package:cinetrack/features/auth/presentation/widgets/button_submit.dart';
+import 'package:cinetrack/core/widget/button_submit.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/footer_auth.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/header_auth.dart';
 import 'package:flutter/material.dart';

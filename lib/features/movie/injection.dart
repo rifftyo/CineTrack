@@ -5,6 +5,7 @@ import 'package:cinetrack/features/movie/domain/usecases/detail_movie.dart';
 import 'package:cinetrack/features/movie/domain/usecases/now_playing_movies.dart';
 import 'package:cinetrack/features/movie/domain/usecases/search_movies.dart';
 import 'package:cinetrack/features/movie/domain/usecases/top_rated_movies.dart';
+import 'package:cinetrack/features/movie/presentation/bloc/detail/detail_movie_bloc.dart';
 import 'package:cinetrack/features/movie/presentation/bloc/search/search_movie_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -29,4 +30,5 @@ void initMovieInjection() {
 
   // Bloc
   locator.registerLazySingleton(() => SearchMovieBloc(locator()));
+  locator.registerLazySingleton(() => DetailMovieBloc(locator()));
 }

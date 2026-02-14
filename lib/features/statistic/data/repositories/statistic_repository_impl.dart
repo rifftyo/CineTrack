@@ -32,7 +32,8 @@ class StatisticRepositoryImpl implements StatisticRepository {
   Future<Either<Failure, Statistic>> getStatistics(String year) async {
     try {
       final response = await remote.getStatistics(year);
-      return Right(response.data.toEntity());
+      final statResponse = response.data.values.first;
+      return Right(statResponse.toEntity());
     } on ConnectionException catch (e) {
       return Left(ConnectionFailure(e.message ?? "No Internet Connection"));
     } on BadRequestException catch (e) {

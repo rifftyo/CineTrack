@@ -8,4 +8,7 @@ class AppRoutes {
   static const resetPassword = '/resetPassword';
   static const verifyUser = '/verifyUser';
   static const verifyResetPassword = '/verifyResetPassword';
+  static const detailMovie = '/detailMovie';
+  static const addWatchedMovie = '/addWatchedMovie';
+  static const statistic = '/statistic';
 }

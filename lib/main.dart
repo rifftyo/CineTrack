@@ -10,7 +10,12 @@ import 'package:cinetrack/features/auth/presentation/bloc/reset_password/reset_p
 import 'package:cinetrack/features/auth/presentation/bloc/verify_reset_password/verify_reset_password_bloc.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/verify_user/verify_user_bloc.dart';
 import 'package:cinetrack/features/home/presentation/bloc/home_bloc.dart';
+import 'package:cinetrack/features/movie/presentation/bloc/detail/detail_movie_bloc.dart';
 import 'package:cinetrack/features/movie/presentation/bloc/search/search_movie_bloc.dart';
+import 'package:cinetrack/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:cinetrack/features/statistic/presentation/bloc/statistic_bloc.dart';
+import 'package:cinetrack/features/watched/presentation/bloc/add_watched_movie/add_watched_movie_bloc.dart';
+import 'package:cinetrack/features/watched/presentation/bloc/watched_movie/watched_movie_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,6 +45,14 @@ class MainApp extends StatelessWidget {
         BlocProvider(create: (_) => locator<HomeBloc>()),
         // Movie
         BlocProvider(create: (_) => locator<SearchMovieBloc>()),
+        BlocProvider(create: (_) => locator<DetailMovieBloc>()),
+        // Watched
+        BlocProvider(create: (_) => locator<WatchedMovieBloc>()),
+        BlocProvider(create: (_) => locator<AddWatchedMovieBloc>()),
+        // Statistic
+        BlocProvider(create: (_) => locator<StatisticBloc>()),
+        // Profile
+        BlocProvider(create: (_) => locator<ProfileBloc>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -3,6 +3,8 @@ import 'package:cinetrack/core/styles/app_colors.dart';
 import 'package:cinetrack/core/widget/app_background.dart';
 import 'package:cinetrack/features/home/presentation/pages/home_page.dart';
 import 'package:cinetrack/features/movie/presentation/pages/search_movie_page.dart';
+import 'package:cinetrack/features/profile/presentation/pages/profile_page.dart';
+import 'package:cinetrack/features/watched/presentation/pages/watched_movie_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,8 +14,8 @@ class MainPage extends StatelessWidget {
   final List<Widget> _pages = const [
     HomePage(),
     SearchMoviePage(),
-    Center(child: Text("Favorites Page")),
-    Center(child: Text("Profile Page")),
+    WatchedMoviePage(),
+    ProfilePage(),
   ];
 
   @override

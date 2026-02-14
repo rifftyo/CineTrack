@@ -3,6 +3,7 @@ import 'package:cinetrack/features/statistic/data/repositories/statistic_reposit
 import 'package:cinetrack/features/statistic/domain/repositories/statistic_repositoy.dart';
 import 'package:cinetrack/features/statistic/domain/usecases/insights.dart';
 import 'package:cinetrack/features/statistic/domain/usecases/statistics.dart';
+import 'package:cinetrack/features/statistic/presentation/bloc/statistic_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 final locator = GetIt.instance;
@@ -23,4 +24,7 @@ void initStatisticInjection() {
   locator.registerLazySingleton(() => Statistics(locator()));
 
   // Bloc
+  locator.registerFactory(
+    () => StatisticBloc(statistics: locator(), insights: locator()),
+  );
 }

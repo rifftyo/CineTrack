@@ -3,7 +3,7 @@ import 'package:cinetrack/core/utils/show_snack.dart';
 import 'package:cinetrack/core/widget/app_background.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/verify_user/verify_user_bloc.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/verify_user/verify_user_state.dart';
-import 'package:cinetrack/features/auth/presentation/widgets/button_submit.dart';
+import 'package:cinetrack/core/widget/button_submit.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/footer_auth.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/header_auth.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/otp_input_row.dart';
