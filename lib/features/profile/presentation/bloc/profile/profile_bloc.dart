@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:cinetrack/features/profile/domain/usecases/profile.dart';
-import 'package:cinetrack/features/profile/presentation/bloc/profile_state.dart';
+import 'package:cinetrack/features/profile/presentation/bloc/profile/profile_state.dart';
 
 class ProfileBloc extends Cubit<ProfileState> {
   final Profile profile;

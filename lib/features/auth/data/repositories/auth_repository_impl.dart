@@ -143,4 +143,16 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(ServerFailure("Unexpected Error: $e"));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> logout() async {
+    try {
+      await storage.clear();
+      return const Right(null);
+    } on CacheException catch (e) {
+      return Left(CacheFailure(e.message));
+    } catch (e) {
+      return Left(CacheFailure('Unexpected logout error'));
+    }
+  }
 }

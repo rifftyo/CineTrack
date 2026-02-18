@@ -2,8 +2,8 @@ import 'package:cinetrack/core/styles/app_colors.dart';
 import 'package:cinetrack/core/styles/app_text_style.dart';
 import 'package:flutter/material.dart';
 
-class AuthField extends StatefulWidget {
-  const AuthField({
+class FormFieldWidget extends StatefulWidget {
+  const FormFieldWidget({
     super.key,
     required this.controller,
     required this.title,
@@ -19,10 +19,10 @@ class AuthField extends StatefulWidget {
   final bool isPassword;
 
   @override
-  State<AuthField> createState() => _AuthFieldState();
+  State<FormFieldWidget> createState() => FormFieldWidgetState();
 }
 
-class _AuthFieldState extends State<AuthField> {
+class FormFieldWidgetState extends State<FormFieldWidget> {
   bool _obscure = true;
 
   @override

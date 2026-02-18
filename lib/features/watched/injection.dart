@@ -5,6 +5,7 @@ import 'package:cinetrack/features/watched/domain/usecases/send_watched_movie.da
 import 'package:cinetrack/features/watched/domain/usecases/update_watched_movie.dart';
 import 'package:cinetrack/features/watched/domain/usecases/watched_movie.dart';
 import 'package:cinetrack/features/watched/presentation/bloc/add_watched_movie/add_watched_movie_bloc.dart';
+import 'package:cinetrack/features/watched/presentation/bloc/update_watched_movie/update_watched_movie_bloc.dart';
 import 'package:cinetrack/features/watched/presentation/bloc/watched_movie/watched_movie_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -29,4 +30,5 @@ void initWatchedInjection() {
   // Bloc
   locator.registerLazySingleton(() => WatchedMovieBloc(locator()));
   locator.registerLazySingleton(() => AddWatchedMovieBloc(locator()));
+  locator.registerLazySingleton(() => UpdateWatchedMovieBloc(locator()));
 }

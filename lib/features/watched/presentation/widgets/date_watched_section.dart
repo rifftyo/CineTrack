@@ -7,43 +7,41 @@ class DateWatchedSection extends StatelessWidget {
     super.key,
     required this.watchedDate,
     required this.onTap,
+    this.isEnabled = true,
   });
 
   final DateTime? watchedDate;
   final VoidCallback onTap;
+  final bool isEnabled;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Date Watched', style: AppTextStyle.largeWhite),
-        const SizedBox(height: 10),
-        GestureDetector(
-          onTap: onTap,
-          child: Container(
-            padding: const EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              color: const Color(0x50364153),
-              borderRadius: BorderRadius.circular(24),
-            ),
-            child: Row(
-              children: [
-                const Icon(Icons.calendar_month_outlined, color: Colors.grey),
-                const SizedBox(width: 10),
-                Text(
-                  watchedDate == null
-                      ? 'Select date'
-                      : formatDateToReadable(watchedDate!.toIso8601String()),
-                  style: AppTextStyle.largeWhite.copyWith(
-                    color: watchedDate == null ? Colors.grey : Colors.white,
-                  ),
-                ),
-              ],
-            ),
+    return GestureDetector(
+      onTap: isEnabled ? onTap : null,
+      child: Opacity(
+        opacity: isEnabled ? 1 : 0.5,
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: const Color(0x50364153),
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: Row(
+            children: [
+              const Icon(Icons.calendar_today, color: Colors.white),
+              const SizedBox(width: 10),
+              Text(
+                watchedDate != null
+                    ? formatDateToReadable(
+                        watchedDate!.toIso8601String(),
+                      )
+                    : 'Select watched date',
+                style: AppTextStyle.mediumWhite,
+              ),
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
 }

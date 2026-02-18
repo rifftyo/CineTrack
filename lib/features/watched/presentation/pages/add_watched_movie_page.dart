@@ -3,8 +3,11 @@ import 'package:cinetrack/core/utils/show_snack.dart';
 import 'package:cinetrack/core/widget/app_background.dart';
 import 'package:cinetrack/core/widget/button_submit.dart';
 import 'package:cinetrack/features/home/presentation/bloc/home_bloc.dart';
+import 'package:cinetrack/features/movie/presentation/bloc/detail/detail_movie_bloc.dart';
 import 'package:cinetrack/features/watched/presentation/bloc/add_watched_movie/add_watched_movie_bloc.dart';
 import 'package:cinetrack/features/watched/presentation/bloc/add_watched_movie/add_watched_movie_state.dart';
+import 'package:cinetrack/features/watched/presentation/bloc/update_watched_movie/update_watched_movie_bloc.dart';
+import 'package:cinetrack/features/watched/presentation/bloc/update_watched_movie/update_watched_movie_state.dart';
 import 'package:cinetrack/features/watched/presentation/bloc/watched_movie/watched_movie_bloc.dart';
 import 'package:cinetrack/features/watched/presentation/widgets/date_watched_section.dart';
 import 'package:cinetrack/features/watched/presentation/widgets/header_watched.dart';
@@ -21,12 +24,20 @@ class AddWatchedMoviePage extends StatefulWidget {
     required this.image,
     required this.title,
     required this.year,
+    this.ratingValue,
+    this.reviewValue,
+    this.watchedValue,
+    this.isEdit = false,
   });
 
   final int id;
   final String image;
   final String title;
   final String year;
+  final double? ratingValue;
+  final String? reviewValue;
+  final String? watchedValue;
+  final bool isEdit;
 
   @override
   State<AddWatchedMoviePage> createState() => _AddWatchedMoviePageState();
@@ -36,6 +47,20 @@ class _AddWatchedMoviePageState extends State<AddWatchedMoviePage> {
   double _rating = 5;
   final TextEditingController _reviewController = TextEditingController();
   DateTime? _watchedDate;
+
+  @override
+  void initState() {
+    if (widget.ratingValue != null) {
+      _rating = widget.ratingValue!;
+    }
+    if (widget.reviewValue != null) {
+      _reviewController.text = widget.reviewValue!;
+    }
+    if (widget.watchedValue != null) {
+      _watchedDate = DateTime.parse(widget.watchedValue!);
+    }
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -69,6 +94,64 @@ class _AddWatchedMoviePageState extends State<AddWatchedMoviePage> {
     }
   }
 
+  Widget _buildSubmitButton() {
+    if (widget.isEdit) {
+      return BlocConsumer<UpdateWatchedMovieBloc, UpdateWatchedMovieState>(
+        listener: (context, state) {
+          if (state is UpdateWatchedMovieSuccess) {
+            context.read<WatchedMovieBloc>().fetchWatchedMovie();
+            context.read<HomeBloc>().loadHome();
+            context.read<DetailMovieBloc>().fetchDetailMovie(id: widget.id);
+            showSnack(context, state.message);
+            Navigator.pop(context);
+          } else if (state is UpdateWatchedMovieFailure) {
+            showSnack(context, state.error);
+          }
+        },
+        builder: (context, state) {
+          return ButtonSubmit(
+            title: 'Update Watched Movie',
+            isLoading: state is UpdateWatchedMovieLoading,
+            onTap: () {
+              context.read<UpdateWatchedMovieBloc>().updateWatchedMovie(
+                widget.id,
+                _rating,
+                _reviewController.text,
+              );
+            },
+          );
+        },
+      );
+    }
+
+    return BlocConsumer<AddWatchedMovieBloc, AddWatchedMovieState>(
+      listener: (context, state) {
+        if (state is AddWatchedMovieSuccess) {
+          context.read<WatchedMovieBloc>().fetchWatchedMovie();
+          context.read<HomeBloc>().loadHome();
+          showSnack(context, state.message);
+          Navigator.pop(context);
+        } else if (state is AddWatchedMovieFailure) {
+          showSnack(context, state.error);
+        }
+      },
+      builder: (context, state) {
+        return ButtonSubmit(
+          title: 'Add to Watched Movie',
+          isLoading: state is AddWatchedMovieLoading,
+          onTap: () {
+            context.read<AddWatchedMovieBloc>().addWatchedMovie(
+              widget.id,
+              _rating,
+              formatDateToReadable(_watchedDate!.toIso8601String()),
+              _reviewController.text,
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppBackground(
@@ -94,6 +177,7 @@ class _AddWatchedMoviePageState extends State<AddWatchedMoviePage> {
               const SizedBox(height: 15),
               DateWatchedSection(
                 watchedDate: _watchedDate,
+                isEnabled: !widget.isEdit,
                 onTap: () {
                   _selectWatchedDate(context);
                 },
@@ -101,32 +185,7 @@ class _AddWatchedMoviePageState extends State<AddWatchedMoviePage> {
               const SizedBox(height: 15),
               ReviewSection(controller: _reviewController),
               const SizedBox(height: 35),
-              BlocConsumer<AddWatchedMovieBloc, AddWatchedMovieState>(
-                listener: (context, state) {
-                  if (state is AddWatchedMovieSuccess) {
-                    context.read<WatchedMovieBloc>().fetchWatchedMovie();
-                    context.read<HomeBloc>().loadHome();
-                    showSnack(context, state.message);
-                    Navigator.pop(context);
-                  } else if (state is AddWatchedMovieFailure) {
-                    showSnack(context, state.error);
-                  }
-                },
-                builder: (context, state) {
-                  return ButtonSubmit(
-                    title: 'Add to Watched Movie',
-                    isLoading: state is AddWatchedMovieLoading,
-                    onTap: () {
-                      context.read<AddWatchedMovieBloc>().addWatchedMovie(
-                        widget.id,
-                        _rating,
-                        formatDateToReadable(_watchedDate!.toIso8601String()),
-                        _reviewController.text,
-                      );
-                    },
-                  );
-                },
-              ),
+              _buildSubmitButton(),
             ],
           ),
         ),

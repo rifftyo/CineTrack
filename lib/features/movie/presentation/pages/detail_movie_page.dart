@@ -212,7 +212,26 @@ class _DetailMoviePageState extends State<DetailMoviePage> {
                                   ButtonSubmit(
                                     title: 'Update Watched Movie',
                                     onTap: () {
-                                      
+                                      Navigator.pushNamed(
+                                        context,
+                                        AppRoutes.addWatchedMovie,
+                                        arguments: {
+                                          "id": movie.id,
+                                          "image": movie.posterPath,
+                                          "title": movie.title,
+                                          "year": movie.releaseDate!.substring(
+                                            0,
+                                            4,
+                                          ),
+                                          "ratingValue":
+                                              movie.watchedData!.userRating,
+                                          "reviewValue":
+                                              movie.watchedData!.review,
+                                          "watchedValue":
+                                              movie.watchedData!.wathchedAt,
+                                          "isEdit": true,
+                                        },
+                                      );
                                     },
                                   ),
                                 ],
@@ -227,7 +246,10 @@ class _DetailMoviePageState extends State<DetailMoviePage> {
                                       "id": movie.id,
                                       "image": movie.posterPath,
                                       "title": movie.title,
-                                      "year": movie.releaseDate!.substring(0, 4)
+                                      "year": movie.releaseDate!.substring(
+                                        0,
+                                        4,
+                                      ),
                                     },
                                   );
                                 },

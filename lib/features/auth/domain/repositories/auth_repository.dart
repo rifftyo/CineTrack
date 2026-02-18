@@ -20,4 +20,5 @@ abstract class AuthRepository {
     String newPassword,
   );
   Future<Either<Failure, String>> postLoginUser(String email, String password);
+  Future<Either<Failure, void>> logout();
 }

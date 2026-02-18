@@ -11,4 +11,5 @@ class AppRoutes {
   static const detailMovie = '/detailMovie';
   static const addWatchedMovie = '/addWatchedMovie';
   static const statistic = '/statistic';
+  static const editProfile = '/editProfile';
 }

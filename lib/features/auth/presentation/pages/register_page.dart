@@ -3,7 +3,7 @@ import 'package:cinetrack/core/utils/show_snack.dart';
 import 'package:cinetrack/core/widget/app_background.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/register/register_bloc.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/register/register_state.dart';
-import 'package:cinetrack/features/auth/presentation/widgets/auth_field.dart';
+import 'package:cinetrack/core/widget/form_field_widget.dart';
 import 'package:cinetrack/core/widget/button_submit.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/footer_auth.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/header_auth.dart';
@@ -42,7 +42,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 40),
 
-                AuthField(
+                FormFieldWidget(
                   controller: fullNameController,
                   title: 'Full Name',
                   hintText: 'John Doe',
@@ -50,7 +50,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 20),
 
-                AuthField(
+                FormFieldWidget(
                   controller: usernameController,
                   title: 'Username',
                   hintText: 'johndoe',
@@ -58,7 +58,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 20),
 
-                AuthField(
+                FormFieldWidget(
                   controller: emailController,
                   title: 'Email',
                   hintText: 'your@email.com',
@@ -66,7 +66,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 20),
 
-                AuthField(
+                FormFieldWidget(
                   controller: passwordController,
                   title: 'Password',
                   hintText: 'Create a password',
@@ -75,7 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 20),
 
-                AuthField(
+                FormFieldWidget(
                   controller: confirmPasswordController,
                   title: 'Confirm Password',
                   hintText: 'Confirm your password',

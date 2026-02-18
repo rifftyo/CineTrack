@@ -3,7 +3,7 @@ import 'package:cinetrack/core/utils/show_snack.dart';
 import 'package:cinetrack/core/widget/app_background.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/reset_password/reset_password_bloc.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/reset_password/reset_password_state.dart';
-import 'package:cinetrack/features/auth/presentation/widgets/auth_field.dart';
+import 'package:cinetrack/core/widget/form_field_widget.dart';
 import 'package:cinetrack/core/widget/button_submit.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/footer_auth.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/header_auth.dart';
@@ -38,7 +38,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 image: 'assets/images/icon_cinetrack.png',
               ),
               const SizedBox(height: 40),
-              AuthField(
+              FormFieldWidget(
                 controller: passwordController,
                 title: 'New Password',
                 hintText: 'your new password',

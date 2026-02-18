@@ -56,31 +56,16 @@ class MovieRepositoryImpl implements MovieRepository {
     int? genre,
   ) async {
     try {
-      debugPrint("🔍 [Repository] SEARCH MOVIE");
-      debugPrint("➡️ Query      : $query");
-      debugPrint("➡️ Min Rating : $minRating");
-      debugPrint("➡️ Genre      : $genre");
-
       final response = await remote.getSearchMovie(query, minRating, genre);
-
-      // DEBUG RESPONSE
-      debugPrint("✅ [Repository] RESPONSE RECEIVED");
-      debugPrint("➡️ Results count: ${response.results.length}");
 
       final movies = response.results.map((e) => e.toEntity()).toList();
 
       return Right(movies);
     } on ConnectionException catch (e) {
-      debugPrint("❌ [Repository] ConnectionException");
-      debugPrint("➡️ Message: ${e.message}");
       return Left(ConnectionFailure(e.message ?? "No Internet Connection"));
     } on BadRequestException catch (e) {
-      debugPrint("❌ [Repository] BadRequestException");
-      debugPrint("➡️ Message: ${e.message}");
       return Left(BadFailure(e.message ?? "Data Tidak Valid"));
     } on ServerException catch (e) {
-      debugPrint("❌ [Repository] ServerException");
-      debugPrint("➡️ Message: ${e.message}");
       return Left(ServerFailure(e.message ?? "Server Error"));
     } on UnauthorizedException catch (e) {
       debugPrint("❌ [Repository] UnauthorizedException");

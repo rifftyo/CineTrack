@@ -1,9 +1,10 @@
 import 'package:cinetrack/core/styles/app_text_style.dart';
 import 'package:cinetrack/core/widget/app_background.dart';
-import 'package:cinetrack/features/profile/presentation/bloc/profile_bloc.dart';
-import 'package:cinetrack/features/profile/presentation/bloc/profile_state.dart';
+import 'package:cinetrack/features/profile/presentation/bloc/profile/profile_bloc.dart';
+import 'package:cinetrack/features/profile/presentation/bloc/profile/profile_state.dart';
 import 'package:cinetrack/features/profile/presentation/widgets/fav_genre_section.dart';
 import 'package:cinetrack/features/profile/presentation/widgets/header_section.dart';
+import 'package:cinetrack/features/profile/presentation/widgets/log_out_section.dart';
 import 'package:cinetrack/features/profile/presentation/widgets/menu_section.dart';
 import 'package:cinetrack/features/profile/presentation/widgets/stats_section.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +72,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             const SizedBox(height: 20),
                             FavGenreSection(profile: profile),
                             const SizedBox(height: 20),
-                            MenuSection(),
+                            MenuSection(user: profile),
+                            const SizedBox(height: 20),
+                            LogOutSection(),
                           ],
                         ),
                       );

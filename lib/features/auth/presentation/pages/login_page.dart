@@ -1,3 +1,4 @@
+import 'package:cinetrack/app/main/cubit/auth_cubit.dart';
 import 'package:cinetrack/core/router/app_routes.dart';
 import 'package:cinetrack/core/styles/app_colors.dart';
 import 'package:cinetrack/core/styles/app_text_style.dart';
@@ -5,7 +6,7 @@ import 'package:cinetrack/core/utils/show_snack.dart';
 import 'package:cinetrack/core/widget/app_background.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/login/login_state.dart';
-import 'package:cinetrack/features/auth/presentation/widgets/auth_field.dart';
+import 'package:cinetrack/core/widget/form_field_widget.dart';
 import 'package:cinetrack/core/widget/button_submit.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/footer_auth.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/header_auth.dart';
@@ -24,6 +25,13 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
 
   @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AppBackground(
       child: SafeArea(
@@ -38,14 +46,14 @@ class _LoginPageState extends State<LoginPage> {
                 image: 'assets/images/icon_cinetrack.png',
               ),
               const SizedBox(height: 40),
-              AuthField(
+              FormFieldWidget(
                 controller: emailController,
                 title: 'Email',
                 hintText: 'your@email.com',
                 icon: Icons.email,
               ),
               const SizedBox(height: 20),
-              AuthField(
+              FormFieldWidget(
                 controller: passwordController,
                 title: 'Password',
                 hintText: 'Enter Your Password',
@@ -72,7 +80,10 @@ class _LoginPageState extends State<LoginPage> {
                 listener: (context, state) {
                   if (state is LoginSuccess) {
                     showSnack(context, state.message);
-                    Navigator.pushReplacementNamed(context, AppRoutes.main);
+                    context.read<AuthCubit>().loginSuccess();
+                    Navigator.of(
+                      context,
+                    ).pushNamedAndRemoveUntil(AppRoutes.main, (route) => false);
                   } else if (state is LoginFailure) {
                     showSnack(context, state.error);
                   }

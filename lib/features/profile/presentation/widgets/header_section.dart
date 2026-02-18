@@ -3,10 +3,7 @@ import 'package:cinetrack/features/profile/domain/entities/user.dart';
 import 'package:flutter/material.dart';
 
 class HeaderSection extends StatelessWidget {
-  const HeaderSection({
-    super.key,
-    required this.profile,
-  });
+  const HeaderSection({super.key, required this.profile});
 
   final User profile;
 
@@ -23,21 +20,14 @@ class HeaderSection extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 15),
-        Text(
-          profile.fullName,
-          style: AppTextStyle.xLargeWhite,
-        ),
+        Text(profile.fullName, style: AppTextStyle.xLargeWhite),
         Text(
           '@${profile.userName}',
-          style: AppTextStyle.largeWhite.copyWith(
-            color: Color(0xFF99A1AF),
-          ),
+          style: AppTextStyle.largeWhite.copyWith(color: Color(0xFF99A1AF)),
         ),
         Text(
-          'Member since${profile.joined}',
-          style: AppTextStyle.mediumWhite.copyWith(
-            color: Color(0XFF6A7282),
-          ),
+          'Member since ${profile.joined}',
+          style: AppTextStyle.mediumWhite.copyWith(color: Color(0XFF6A7282)),
           textAlign: TextAlign.center,
         ),
       ],

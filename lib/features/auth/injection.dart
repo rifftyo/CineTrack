@@ -3,12 +3,14 @@ import 'package:cinetrack/features/auth/data/datasources/auth_remote_data_source
 import 'package:cinetrack/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:cinetrack/features/auth/domain/repositories/auth_repository.dart';
 import 'package:cinetrack/features/auth/domain/usecases/login_user.dart';
+import 'package:cinetrack/features/auth/domain/usecases/logout.dart';
 import 'package:cinetrack/features/auth/domain/usecases/register_user.dart';
 import 'package:cinetrack/features/auth/domain/usecases/request_password.dart';
 import 'package:cinetrack/features/auth/domain/usecases/reset_password.dart';
 import 'package:cinetrack/features/auth/domain/usecases/verify_reset_password.dart';
 import 'package:cinetrack/features/auth/domain/usecases/verify_user.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/login/login_bloc.dart';
+import 'package:cinetrack/features/auth/presentation/bloc/logout/logout_state.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/register/register_bloc.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/request_password/request_password_bloc.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/reset_password/reset_password_bloc.dart';
@@ -39,6 +41,7 @@ void initAuthInjection() {
   locator.registerLazySingleton(() => VerifyResetPassword(locator()));
   locator.registerLazySingleton(() => RequestPassword(locator()));
   locator.registerLazySingleton(() => ResetPassword(locator()));
+  locator.registerLazySingleton(() => Logout(locator()));
 
   // Bloc
   locator.registerFactory(() => LoginBloc(locator()));
@@ -47,4 +50,5 @@ void initAuthInjection() {
   locator.registerFactory(() => VerifyResetPasswordBloc(locator()));
   locator.registerFactory(() => ResetPasswordBloc(locator()));
   locator.registerFactory(() => RequestPasswordBloc(locator()));
+  locator.registerFactory(() => LogoutBloc(locator()));
 }

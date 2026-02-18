@@ -1,3 +1,5 @@
+import 'package:cinetrack/app/main/cubit/auth_cubit.dart';
+import 'package:cinetrack/core/di/injection.dart';
 import 'package:cinetrack/core/storage/secure_storage.dart';
 import 'package:dio/dio.dart';
 
@@ -29,11 +31,12 @@ class DioInterceptor extends Interceptor {
   }
 
   @override
-  void onError(DioException err, ErrorInterceptorHandler handler) async {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     if (err.response?.statusCode == 401 || err.response?.statusCode == 403) {
-      await storage.clear();
+      storage.clear();
+      locator<AuthCubit>().logout();
     }
 
-    return handler.next(err);
+    handler.next(err);
   }
 }

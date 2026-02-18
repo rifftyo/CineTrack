@@ -1,5 +1,6 @@
 import 'package:cinetrack/core/network/dio_client.dart';
 import 'package:cinetrack/core/network/dio_error_handler.dart';
+import 'package:cinetrack/features/profile/data/model/message_response.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:cinetrack/features/profile/data/model/profile_response.dart';
 import 'package:cinetrack/features/profile/domain/entities/avatar.dart';
@@ -7,7 +8,7 @@ import 'package:dio/dio.dart';
 
 abstract class ProfileRemoteDataSource {
   Future<ProfileResponse> getProfile();
-  Future<ProfileResponse> putProfile(
+  Future<MessageResponse> putProfile(
     String? fullName,
     String? userName,
     Avatar? avatar,
@@ -30,7 +31,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   }
 
   @override
-  Future<ProfileResponse> putProfile(
+  Future<MessageResponse> putProfile(
     String? fullName,
     String? userName,
     Avatar? avatar,
@@ -47,13 +48,13 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
           ),
       });
 
-      final response = await dio.post(
+      final response = await dio.put(
         "/user",
         data: formData,
         options: Options(contentType: 'multipart/form-data'),
       );
 
-      return ProfileResponse.fromJson(response.data);
+      return MessageResponse.fromJson(response.data);
     } on DioException catch (e) {
       handleDioError(e);
     }

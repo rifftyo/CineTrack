@@ -4,7 +4,7 @@ import 'package:cinetrack/core/utils/show_snack.dart';
 import 'package:cinetrack/core/widget/app_background.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/request_password/request_password_bloc.dart';
 import 'package:cinetrack/features/auth/presentation/bloc/request_password/request_password_state.dart';
-import 'package:cinetrack/features/auth/presentation/widgets/auth_field.dart';
+import 'package:cinetrack/core/widget/form_field_widget.dart';
 import 'package:cinetrack/core/widget/button_submit.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/footer_auth.dart';
 import 'package:cinetrack/features/auth/presentation/widgets/header_auth.dart';
@@ -57,7 +57,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 image: 'assets/images/icon_email.png',
               ),
               const SizedBox(height: 40),
-              AuthField(
+              FormFieldWidget(
                 controller: emailController,
                 title: 'Email Address',
                 hintText: 'your@email.com',
