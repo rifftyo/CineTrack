@@ -8,9 +8,9 @@
   />
 </p>
 
-**CineTrack** adalah aplikasi mobile untuk membantu pengguna menemukan film, mengelola daftar tontonan, mencatat film yang telah ditonton, memberikan rating dan review, serta melihat statistik aktivitas menonton dalam satu aplikasi.
+**CineTrack** is a mobile application that helps users discover movies, manage their watchlist, keep track of watched movies, provide ratings and reviews, and view their watching activity statistics in one application.
 
-Aplikasi ini dibangun menggunakan **Flutter** dengan pendekatan **Clean Architecture** untuk menghasilkan struktur kode yang modular, mudah dikembangkan, dan mudah dipelihara.
+The application is built using **Flutter** with a **Clean Architecture** approach to provide a modular, scalable, and maintainable codebase.
 
 > 🎯 **Project Type:** Mobile Application
 > 📱 **Platform:** Android & iOS
@@ -24,40 +24,40 @@ Aplikasi ini dibangun menggunakan **Flutter** dengan pendekatan **Clean Architec
 
 ### 🔍 Movie Discovery
 
-* Menjelajahi katalog film.
-* Mencari film berdasarkan kebutuhan pengguna.
-* Menampilkan informasi film secara detail.
-* Menampilkan informasi seperti judul, sinopsis, pemeran, dan rating.
+* Browse the movie catalog.
+* Search for movies based on user needs.
+* View detailed movie information.
+* Display information such as movie title, synopsis, cast, and rating.
 
 ### 📄 Movie Details
 
-Pengguna dapat melihat informasi lengkap dari sebuah film, seperti:
+Users can view detailed information about a movie, including:
 
-* Judul film
-* Sinopsis
-* Pemeran
+* Movie title
+* Synopsis
+* Cast
 * Rating
-* Informasi terkait film lainnya
+* Other relevant movie information
 
 ### 👤 Profile
 
-Pengguna dapat mengelola informasi profil serta preferensi mereka sebagai bagian dari pengalaman menggunakan aplikasi.
+Users can manage their profile information and preferences as part of their overall experience with the application.
 
 ### 📎 Watchlist
 
-Aplikasi menyediakan kemampuan untuk menambahkan film ke dalam daftar tontonan pribadi sehingga pengguna dapat mengelola film yang ingin ditonton.
+The application allows users to add movies to their personal watchlist, making it easier to manage movies they want to watch.
 
 ### ⭐ Rating & Review
 
-Pengguna dapat memberikan rating dan review terhadap film yang telah ditonton untuk membantu mencatat pengalaman menonton.
+Users can provide ratings and reviews for movies they have watched to record and share their viewing experience.
 
 ### 🔐 Secure Storage
 
-Informasi tertentu yang membutuhkan penyimpanan aman menggunakan secure storage untuk membantu menjaga keamanan data pengguna.
+Sensitive information is stored using secure storage to help protect user data.
 
 ### 🎨 Modern UI
 
-Menggunakan komponen UI modern dengan dukungan:
+The application uses modern UI components with support for:
 
 * Material Design 3
 * Responsive layouts
@@ -70,7 +70,7 @@ Menggunakan komponen UI modern dengan dukungan:
 
 ## 🏗️ Architecture
 
-CineTrack menggunakan pendekatan **Clean Architecture** dengan struktur berbasis feature yang memisahkan aplikasi menjadi beberapa layer.
+CineTrack uses a **Clean Architecture** approach with a feature-based structure that separates the application into multiple layers.
 
 ```text
 lib/
@@ -92,7 +92,7 @@ lib/
 
 #### Data Layer
 
-Bertanggung jawab terhadap pengambilan dan pengelolaan data.
+Responsible for retrieving and managing application data.
 
 ```text
 Data Sources
@@ -104,7 +104,7 @@ Repository Implementation
 
 #### Domain Layer
 
-Berisi business logic aplikasi dan tidak bergantung pada framework atau implementasi data tertentu.
+Contains the application's business logic and remains independent of specific frameworks or data implementations.
 
 ```text
 Entities / Business Rules
@@ -116,7 +116,7 @@ Entities / Business Rules
 
 #### Presentation Layer
 
-Menangani UI dan state management aplikasi.
+Handles the application's UI and state management.
 
 ```text
 Pages
@@ -126,7 +126,7 @@ BLoC
 Widgets
 ```
 
-Struktur ini membuat perubahan pada UI, sumber data, maupun business logic dapat dilakukan secara lebih terisolasi.
+This structure allows changes to the UI, data sources, or business logic to be made in a more isolated and maintainable manner.
 
 ---
 
@@ -149,13 +149,13 @@ Struktur ini membuat perubahan pada UI, sumber data, maupun business logic dapat
 | **Flutter Rating Bar**     | Rating component                        |
 | **FL Chart**               | Data visualization                      |
 
-Dependency utama tersebut tercantum pada `pubspec.yaml` project.
+These main dependencies are listed in the project's `pubspec.yaml`.
 
 ---
 
 ## 🔄 Application Flow
 
-Secara umum, alur aplikasi mengikuti pola:
+In general, the application follows this flow:
 
 ```text
 User
@@ -184,7 +184,7 @@ Data Layer
 API / Local Storage
 ```
 
-Hasil data kemudian dikembalikan melalui layer yang sama hingga akhirnya ditampilkan kembali pada UI.
+The resulting data is then returned through the same layers until it is ultimately displayed in the UI.
 
 ---
 
@@ -203,7 +203,7 @@ lib/
 └── main.dart
 ```
 
-Struktur aktual repository memisahkan `core` dan `features`, dengan masing-masing feature memiliki layer `data`, `domain`, dan `presentation`.
+The actual repository structure separates `core` and `features`, with each feature containing `data`, `domain`, and `presentation` layers.
 
 ```text
 features/
@@ -225,9 +225,6 @@ features/
 │       └── widgets/
 ```
 
-
-Struktur aktual repository memisahkan `core` dan `features`, dengan arsitektur berbasis feature yang mencakup `data`, `domain`, dan `presentation`, serta subfolder khusus untuk datasource, models, repositories, entities, use cases, pages, BLoC, dan widgets.
+The actual repository structure separates `core` and `features`, following a feature-based architecture that includes `data`, `domain`, and `presentation` layers, along with dedicated folders for data sources, models, repositories, entities, use cases, pages, BLoC, and widgets.
 
 ---
-
-[CineTrack GitHub Repository](https://github.com/rifftyo/CineTrack?utm_source=chatgpt.com)
