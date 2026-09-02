@@ -53,8 +53,8 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
         "/movies/discover",
         queryParameters: {
           if (query != null && query.isNotEmpty) 'query': query,
-          if (minRating != null) 'min_rating': minRating,
-          if (genre != null) 'genre': genre,
+          'min_rating': ?minRating,
+          'genre': ?genre,
         },
       );
 

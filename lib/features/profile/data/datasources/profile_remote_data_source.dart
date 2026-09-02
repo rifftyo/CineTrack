@@ -38,8 +38,8 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   ) async {
     try {
       final formData = FormData.fromMap({
-        if (fullName != null) 'fullname': fullName,
-        if (userName != null) 'username': userName,
+        'fullname': ?fullName,
+        'username': ?userName,
         if (avatar != null)
           'avatar': MultipartFile.fromBytes(
             avatar.bytes,
