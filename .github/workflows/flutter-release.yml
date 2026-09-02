@@ -51,7 +51,7 @@ jobs:
             echo "storePassword=$KEYSTORE_PASSWORD"
             echo "keyPassword=$KEY_PASSWORD"
             echo "keyAlias=$KEY_ALIAS"
-            echo "storeFile=key/cinetrack-release-key.jks"
+            echo "storeFile=cinetrack-release-key.jks"
           } > android/key/key.properties
 
       - name: Verify keystore
